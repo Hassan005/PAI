@@ -44,7 +44,7 @@ public class RecyclerViewAdaptorEbay extends RecyclerView.Adapter<RecyclerViewAd
         holder.tv_title_ebay.setText(products_ebay.get(position).getProduct_name());
         holder.tv_price_ebay.setText(products_ebay.get(position).getPrice());
         holder.tv_link_ebay.setText(products_ebay.get(position).getPrfile_link());
-        final String model = products_ebay.get(position).getPrfile_link();
+         final String model = products_ebay.get(position).getPrfile_link();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
