@@ -1,6 +1,8 @@
 package com.hassan.productai;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,8 +44,16 @@ public class RecyclerViewAdaptorEbay extends RecyclerView.Adapter<RecyclerViewAd
         holder.tv_title_ebay.setText(products_ebay.get(position).getProduct_name());
         holder.tv_price_ebay.setText(products_ebay.get(position).getPrice());
         holder.tv_link_ebay.setText(products_ebay.get(position).getPrfile_link());
-
-
+        final String model = products_ebay.get(position).getPrfile_link();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Toast.makeText(view.getContext(),"Position: ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(model));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
+            }
+        });
 //        Uri uriOne= Uri.parse(products_ebay.get(position).getImage_link());
 //        holder.imageViewEbay(uriOne);
 //        holder.imageViewEbay.setImageURI(products_ebay.get(position).getImage_link());

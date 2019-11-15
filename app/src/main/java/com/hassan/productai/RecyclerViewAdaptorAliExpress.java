@@ -56,7 +56,7 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
        // Toast.makeText(view.getContext(),"Position: ", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.aliexpress.com/item/4000162862363.html?algo_pvid=8de73da1-19b6-4caf-a27b-c4d1a9ddd685&algo_expid=8de73da1-19b6-4caf-a27b-c4d1a9ddd685-59&btsid=b5e6497a-8d26-4f67-950c-7de324a7d206&ws_ab_test=searchweb0_0,searchweb201602_4,searchweb201603_55"));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("//www.aliexpress.com/item/4000162862363.html?algo_pvid=8de73da1-19b6-4caf-a27b-c4d1a9ddd685&algo_expid=8de73da1-19b6-4caf-a27b-c4d1a9ddd685-59&btsid=b5e6497a-8d26-4f67-950c-7de324a7d206&ws_ab_test=searchweb0_0,searchweb201602_4,searchweb201603_55"));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         view.getContext().startActivity(intent);
     }
