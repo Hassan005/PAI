@@ -1,11 +1,15 @@
 package com.hassan.productai;
 
 import android.content.Intent;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +25,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Main2Activity extends AppCompatActivity  {
 TextView mydata;
     String easyPuzzle;
     private   String recognised_string;
+    private   TextToSpeech textToSpeech;
     private final String blue_shirt = "https://gist.githubusercontent.com/Hassan005/ed149e50d3dab9ba3fa0b4cf4c0e67cf/raw/01560f27e064442d0b07b9900117f21616a74d30/blue_shirt.json" ;
     private final String computer_laptop ="https://gist.githubusercontent.com/Hassan005/760d6c70c7f5dc17909a6edcdd2eb437/raw/129458550f8ef1020cc3ce4e129721fb49c62205/computer_laptop.json";
     private final String mens_pants="https://gist.githubusercontent.com/Hassan005/ebf24dc75e2276eefd1a21d6c43e0b2a/raw/f72622c6c39faae5edee85725df2de0cca9a984f/mens_pants.json";
@@ -34,7 +40,7 @@ TextView mydata;
     private final String red_shirt="https://gist.githubusercontent.com/Hassan005/1f3aeabdcfa4b82dfb96d46c67fd32ef/raw/9146b8c20a07920c712bff88303267cb3a16cb87/red_shirt.json";
     private final String three_piece_dress="https://gist.githubusercontent.com/Hassan005/0d74350926e23a99ae2b922234d4b7ed/raw/f53525a574d7ee29a835e3e737a405bf788b084d/threepiece_dress.json";
     private JsonArrayRequest request ;
-
+    Spinner spinner;
     private RequestQueue requestQueue ;
     private List<Products> istproductEbay ;
     private List<Products> istproductsAliExpress ;
@@ -46,11 +52,29 @@ TextView mydata;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        mydata=findViewById(R.id.textView2);
+//        spinner.setOnItemClickListener(this);
+//        mydata=findViewById(R.id.textView2);
         Intent i = getIntent();
          recognised_string = i.getStringExtra("dat");
-        mydata.setText(recognised_string);
+         textToSpeech=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+             @Override
+             public void onInit(int i) {
+                 if (i==TextToSpeech.SUCCESS)
+                 {
+                     textToSpeech.speak("We think its"+recognised_string,TextToSpeech.QUEUE_ADD,null);
+                 }
 
+             }
+         });
+//        mydata.setText(recognised_string);
+//        TextToSpeech tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int i) {
+//                tts.speak(recognised_string,TextToSpeech.QUEUE_ADD,null);
+//            }
+//        });
+//        tts.setLanguage(Locale.US);
+//        tts.speak(recognised_string, TextToSpeech.QUEUE_ADD, null);
         Toast.makeText(this,"We think it's : "+recognised_string,Toast.LENGTH_LONG).show();
         istproductEbay = new ArrayList<>() ;
         istproductsAliExpress=new ArrayList<>();

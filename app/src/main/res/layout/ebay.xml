@@ -1,56 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_marginTop="5dp"
-    android:padding="5dp"
-    android:background="#fff"
+    android:layout_height="350dp"
+    android:orientation="vertical"
 
     >
-
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/products"
-        android:id="@+id/thumbnail"/>
-
-
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="138dp"
-        android:layout_marginTop="4dp"
-        android:orientation="vertical"
+        android:layout_height="183dp"
+        android:id="@+id/thumbnail"
+        />
 
-        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product name"
+        android:textSize="10sp"
+        android:id="@+id/product_name"
+        />
 
-        <TextView
-            android:id="@+id/product_name"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:text="Product name"
-            android:textSize="10sp"
 
-            android:textStyle="normal" />
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginTop="15dp"
+        android:text="Price"
+        android:textSize="10sp"
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginTop="15dp"
-            android:text="Price"
-            android:textSize="10sp"
+        />
+    <TextView
+        android:id="@+id/product_link"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_marginTop="0dp"
+        android:text="Product Link"
+        android:textSize="10sp"
+        />
 
-            />
-
-        <TextView
-            android:id="@+id/product_link"
-            android:layout_width="match_parent"
-            android:layout_height="31dp"
-            android:layout_marginTop="0dp"
-            android:text="Product Link" />
-
-    </LinearLayout>
 
 
 </LinearLayout>

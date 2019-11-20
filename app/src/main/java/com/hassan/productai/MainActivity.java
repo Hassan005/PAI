@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,6 +45,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQ_CODE_TAKE_PICTURE = 23;
+    private static final int galary = 1;
+
     ImageView imageView;
     Button click;
     String result;
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.test_main_layout);
 
         imageView = findViewById(R.id.imageView2);
 //        category=findViewById(R.id.categoty);
@@ -94,6 +98,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public void galary(View v)
+    {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhoto , galary);//one can be replaced with any action code
+    }
+
 
     public void camera(View v) {
         Intent picIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -114,9 +125,30 @@ public class MainActivity extends AppCompatActivity {
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byteArray = stream.toByteArray();
         }
+        else if (requestCode==galary && resultCode == RESULT_OK)
+        {
+            Uri selectedImage = intent.getData();
+            imageView.setImageURI(selectedImage);
+//            Bundle intentExtras = intent.getExtras();
+//            bmp = (Bitmap) intentExtras.get("data");
+            Bitmap bm=null;
+            if (intent != null) {
+                try {
+                    bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), intent.getData());
+//                    File outputDir = this.getCacheDir(); // Activity context
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byteArray = stream.toByteArray();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+        }
 
 
-    }
     public void connectServer(View v){
         EditText ipv4AddressView = findViewById(R.id.IPAddress);
         String ipv4Address = ipv4AddressView.getText().toString();
